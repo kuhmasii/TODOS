@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todos</title>
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.0.0/mdb.min.css" rel="stylesheet" />
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.0.0/mdb.min.js"></script>
+
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+
+<body>
+    <header>
+        <!-- Navbar -->
+        <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+            <!-- Container wrapper -->
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-togggler-icon d-flex justify-content
+                    -start align-items-center">
+                        <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Left links -->
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'todo:home_page' %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
+                        </li>
+                    </ul>
+                    <!-- Right links -->
+                    <ul class="navbar-nav ms-auto d-flex flex-row">
+                        <!-- Notification dropdown -->
+
+                        <!-- Icon -->
+                        <li class="nav-item me-3 me-lg-0">
+                            <a class="nav-link" href="https://github.com/kuhmasii">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </li>
+                        <!-- Avatar -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#"
+                                id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown"
+                                aria-expanded="false">
+                                <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
+                                    class="rounded-circle" height="22" alt="" loading="lazy" />
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                                {% if user.is_authenticated %}
+                                <li><a class="dropdown-item" href="{% url 'todo:dashboard_page' %}">My profile</a></li>
+                                <li><a class="dropdown-item" href="{% url 'todo:completed_page' %}">Completed</a></li>
+                                <li><a class="dropdown-item" href="{% url 'todo:important_page' %}">Important</a></li>
+                                <li><a class="dropdown-item" href="{% url 'user_logout' %}">Logout</a></li>
+                                {% else %}
+                                <li><a class="dropdown-item" href="{% url 'todo:register_page' %}">Sign Up</a></li>
+                                <li><a class="dropdown-item" href="{% url 'todo:user_login' %}">Login</a></li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Container wrapper -->
+        </nav>
+        <!-- Navbar -->
+        <!-- Jumbotron -->
+        <div class="p-5 text-center bg-light my-5">
+            <h1 class="mb-3">Todo App</h1>
+            <a class="btn btn-primary" href="{% url 'todo:create_todo' %}" role="button">create a Todo</a>
+        </div>
+        <!-- Jumbotron -->
+    </header>
+    <main>
+        <div class="container my-5">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="jumbotron">
+    <p>
+    <h2 class="text-center text-primary">Welcome to your Dashboard, {{user.username|upper}}🤩😁</h2>
+    </p>
+    <br>
+    <hr>
+    <h2 class="text-success">These are your Todos</h2>
+    <hr>
+    {% for todo in todos %}
+    <a href="{% url 'todo:todo_details' todo.id %}">{{ todo.title }}</a>
+    <p class="note note-secondary"><strong>Memo:</strong>----{{todo.memo|truncatewords:20}}</p>
+    {% endfor %}
+    {% if no_todo %}
+    <h1 class="text-danger">{{no_todo}}</h1>
+    {% endif %}
+</div>
+{% endblock %}

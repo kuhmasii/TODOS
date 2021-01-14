@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="jumbotron d-flex justify-content-center">
+    <form method="post">
+
+        <!-- 2 column grid layout with text inputs for the first and last names -->
+        <div class="row mb-4">
+            <div class="col">
+                <div class="form-outline">
+                    <input type="text" name="first_name" id="id_first_name" class="form-control text-dark" required
+                        maxlength="30" />
+                    <label for="id_firstname">First name</label>
+                    <p>{{ form.first_name.errors }}</p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-outline">
+                    <input type="text" name="last_name" id="id_last_name" class="form-control text-dark" required
+                        maxlength="30" />
+                    <label for="id_last_name">Last name</label>
+                    <p>{{ form.last_name.errors }}</p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-outline">
+                    <input type="text" name="username" id="id_username" class="form-control text-dark" required
+                        maxlength="150" />
+                    <label for="id_username">Username</label>
+                    <p>{{ form.username.errors }}</p>
+                </div>
+            </div>
+        </div>
+        <!-- Email input -->
+        <div class="form-outline mb-4">
+            <input type="email" name="email" id="id_email" class="form-control text-dark" required />
+            <label for="id_email">Email address</label>
+            <p>{{ form.email.errors }}</p>
+        </div>
+
+        <!-- Password input -->
+        <div class="form-outline mb-4">
+            <input type="password" name="password" id="id_password" class="form-control text-dark" required />
+            <label for="id_password">Password</label>
+            <p>{{ form.password.errors }}</p>
+        </div>
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary btn-block mb-4">Sign up</button>
+        {% csrf_token %}
+        <h5 class="text-warning">{{ form.non_field_errors }}</h5>
+    </form>
+</div>
+{% endblock %}

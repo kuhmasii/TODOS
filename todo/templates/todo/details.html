@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="jumbotron">
+    <p>
+    <h2 class="text-center text-primary">Hello, {{user.username|upper}}🤗🤓</h2>
+    </p>
+    <br>
+    <hr>
+    <h1 class="text-secondary">{{todo.title}}</h1>
+    <p class="note note-success">{{todo.memo}}</p>
+    <div class="d-flex align-items-start">
+        <form action="{% url 'todo:todo_completed' todo.id %}" method="POST" class="m-2">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success btn-rounded btn-lg">Completed</button>
+        </form>
+        <br>
+        <form action="{% url 'todo:todo_deleted' todo.id %}" method="POST" class="m-2">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-rounded btn-lg">Delete</button>
+        </form>
+    </div>
+    <br>
+    <hr>
+   
+    <div class="row d-flex justify-content-left">
+        <div class="col-lg-7">
+            <h5 class="text-warning text-center mb-3">Update Info</h5>
+            <form method="POST">
+                <!-- title -->
+                <div class="form-outline mb-4">
+                    <input type="text" name="title" id="id_title" class="form-control" maxlength="100" required />
+                    <label for="id_title">Title</label>
+                    <p>{{ form.title.errors }}</p>
+                </div>
+
+                <!-- memo -->
+                <div class="form-outline mb-4">
+                    <textarea class="form-control" name="memo" id="id_memo" rows="4"></textarea>
+                    <label for="id_memo">Memo</label>
+                    <p>{{ form.memo.errors }}</p>
+                </div>
+                <!-- important -->
+                <div class="form-check d-flex justify-content-center mb-4">
+                    <input class="form-check-input me-2" type="checkbox" name="important" id="id_important" />
+                    <label class="form-check-label" for="form6Example8"> Important</label>
+                </div>
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-success btn-block mb-4">Update</button>
+                {% csrf_token %}
+                <h5 class="text-warning">{{ form.non_field_errors }}</h5>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

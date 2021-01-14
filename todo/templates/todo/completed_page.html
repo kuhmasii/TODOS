@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="jumbotron">
+    <p>
+    <h2 class="text-center text-primary">Hello, {{user.username|upper}}🤗🤓</h2>
+    </p>
+    <br>
+    <hr>
+    <h2 class="text-info">Completed Todos</h2>
+    <hr>
+    <br>
+    {% for todo in todos %}
+    <h2 class="danger">{{ todo.title|upper}}</h2>
+    <h5 class="text-secondary">{{todo.date_completed|date:"l, d F, Y"}}</h5>
+    <p class="note note-warning">{{todo.memo}}</p>
+    {% endfor %}
+    {% if no_todo %}
+    <h1 class="text-secondary">{{no_todo}}</h1>
+    {% endif %}
+
+</div>
+{% endblock %}
