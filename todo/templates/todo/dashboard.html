@@ -4,7 +4,7 @@
 {% block content %}
 <div class="jumbotron">
     <p>
-    <h2 class="text-center text-primary">Welcome to your Dashboard, {{user.username|upper}}🤩😁</h2>
+    <h2 class="text-center text-primary">Welcome to your Dashboard, {{request.user.username|upper}}🤩😁</h2>
     </p>
     <br>
     <hr>
@@ -19,3 +19,4 @@
     {% endif %}
 </div>
 {% endblock %}
+
